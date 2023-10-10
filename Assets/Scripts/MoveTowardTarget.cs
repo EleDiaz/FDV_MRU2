@@ -10,7 +10,9 @@ public class MoveTowardTarget : MonoBehaviour
 
     public GameObject fleeTarget = null;
 
-    public float fleeDistance = 5.0f;
+    public float fleeDistance = 1.0f;
+
+    public bool fleeAlert = false;
 
     public float speed = 5.0f;
 
@@ -22,12 +24,20 @@ public class MoveTowardTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, fleeTarget.transform.position) < fleeDistance)
-        {
+        if (fleeAlert) {
             var direction = _waypointProgressTracker.target.position - transform.position;
             transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
         }
+        if (Vector3.Distance(transform.position, fleeTarget.transform.position) < fleeDistance && !fleeAlert) {
+            fleeAlert = true;
+            StartCoroutine(Flee());
+        }
     }
 
+    IEnumerator Flee()
+    {
+        yield return new WaitForSeconds(5.0f);
+        fleeAlert = false;
+    }
 
 }

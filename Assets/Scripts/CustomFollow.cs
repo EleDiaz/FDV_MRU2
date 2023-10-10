@@ -17,8 +17,6 @@ public class CustomFollow : MonoBehaviour
     // Value of 1 will not affect the rotation.
     public float rotationSpeed = 5.0f;
 
-    public bool likeACar = false;
-
     private int _objectToFollow = 0;
 
     private Rigidbody _rigidbody = null;
@@ -65,12 +63,7 @@ public class CustomFollow : MonoBehaviour
             )
         );
 
-        if (likeACar) {
-            _rigidbody.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
-        }
-        else {
-            _rigidbody.MovePosition(aimedDirection() * speed * Time.fixedDeltaTime);
-        }
+        _rigidbody.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
     }
 
     void NextGameObject()

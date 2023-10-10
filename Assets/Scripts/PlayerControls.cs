@@ -9,10 +9,12 @@ public class PlayerControls : MonoBehaviour
 
     public InputActionReference movementAction = null;
 
+    public float speed = 5f;
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        movementAction.action.Enable();
     }
 
 
@@ -22,17 +24,6 @@ public class PlayerControls : MonoBehaviour
 
         var movement = movementAction.action.ReadValue<Vector2>();
 
-        _rigidbody.MoveRotation(
-            Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(aimedDirection()), rotationSpeed * Time.fixedDeltaTime
-            )
-        );
-
-        if (likeACar) {
-            _rigidbody.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
-        }
-        else {
-            _rigidbody.MovePosition(aimedDirection() * speed * Time.fixedDeltaTime);
-        }
+        _rigidbody.MovePosition(transform.position + new Vector3(movement.x, 0, movement.y) * speed * Time.fixedDeltaTime);
     }
-
 }
