@@ -10,3 +10,5 @@ En `CustomFollow.cs` se implementa un circuito de waypoints desde cero.
 
 https://github.com/EleDiaz/FDV_MRU2/assets/2550542/35409f3f-dd3e-4f0f-be37-988a7fb7ff67
 
+s
+
